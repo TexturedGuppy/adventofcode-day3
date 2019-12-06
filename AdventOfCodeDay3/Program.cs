@@ -13,12 +13,17 @@ namespace AdventOfCodeDay3
             Program P = new Program();
             int manhattanDistanceFromOrigin = 0;
 
+            int wire1StepCounter = 0;
+            int wire2StepCounter = 0;
+
             //Lists that will contain the input coords in the form of strings
             List<string> wire1Raw = new List<string>();
             List<string> wire2Raw = new List<string>();
 
             List<Tuple<int, int>> wire1Coords = new List<Tuple<int,int>>();
             List<Tuple<int, int>> wire2Coords = new List<Tuple<int,int>>();
+            List<Tuple<int, int, int>> wire1CoordsWithSteps = new List<Tuple<int, int, int>>();
+            List<Tuple<int, int, int>> wire2CoordsWithSteps = new List<Tuple<int, int, int>>();
             //var wireCoords = new List<Tuple<int,int>>();
 
 
@@ -72,6 +77,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentXCoord; i <= currentXCoord + direction; i++)
                     {
                         wire1Coords.Add(new Tuple<int, int>(i, currentYCoord));
+                        wire1CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire1StepCounter));
+                        wire1StepCounter++;
                     }
                     currentXCoord += direction;
                 }
@@ -81,7 +88,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentXCoord; i >= (currentXCoord - direction); i--)
                     {
                         wire1Coords.Add(new Tuple<int, int>(i, currentYCoord));
-
+                        wire1CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire1StepCounter));
+                        wire1StepCounter++;
                     }
                     currentXCoord -= direction;
                 }
@@ -91,7 +99,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentYCoord; i <= currentYCoord + direction; i++)
                     {
                         wire1Coords.Add(new Tuple<int, int>(currentXCoord, i));
-
+                        wire1CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire1StepCounter));
+                        wire1StepCounter++;
                     }
                     currentYCoord += direction;
                 }
@@ -101,7 +110,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentYCoord; i >= (currentYCoord - direction); i--)
                     {
                         wire1Coords.Add(new Tuple<int, int>(currentXCoord, i));
-
+                        wire1CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire1StepCounter));
+                        wire1StepCounter++;
                     }
                     currentYCoord -= direction;
 
@@ -112,7 +122,6 @@ namespace AdventOfCodeDay3
             currentYCoord = 0;
             foreach (string s in wire2Raw)
             {
-
                 string stringToConvert = s.Substring(1, s.Length - 1);
                 int direction = Convert.ToInt32(stringToConvert);
                 if (s[0] == 'R')
@@ -120,7 +129,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentXCoord; i <= currentXCoord + direction; i++)
                     {
                         wire2Coords.Add(new Tuple<int, int>(i, currentYCoord));
-
+                        wire2CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire2StepCounter));
+                        wire2StepCounter++;
                     }
                     currentXCoord += direction;
                 }
@@ -129,7 +139,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentXCoord; i >= (currentXCoord - direction); i--)
                     {
                         wire2Coords.Add(new Tuple<int, int>(i, currentYCoord));
-
+                        wire2CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire2StepCounter));
+                        wire2StepCounter++;
                     }
                     currentXCoord -= direction;
                 }
@@ -138,7 +149,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentYCoord; i <= currentYCoord + direction; i++)
                     {
                         wire2Coords.Add(new Tuple<int, int>(currentXCoord, i));
-
+                        wire2CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire2StepCounter));
+                        wire2StepCounter++;
                     }
                     currentYCoord += direction;
                 }
@@ -147,7 +159,8 @@ namespace AdventOfCodeDay3
                     for (int i = currentYCoord; i >= (currentYCoord - direction); i--)
                     {
                         wire2Coords.Add(new Tuple<int, int>(currentXCoord, i));
-
+                        wire2CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire2StepCounter));
+                        wire2StepCounter++;
                     }
                     currentYCoord -= direction;
                 }
@@ -158,7 +171,7 @@ namespace AdventOfCodeDay3
             //var tupleConversion = duplicates.ToList();
             int manhattanCounter = 0;
             Tuple<int, int> coordsForShortest = new Tuple<int, int>(0,0);
-                int tempManhattan = 0;
+            int tempManhattan = 0;
 
             foreach (var i in duplicates)
             {
@@ -183,41 +196,38 @@ namespace AdventOfCodeDay3
                     coordsForShortest = i;
 
                 }
-
-                //Console.WriteLine("Distance For Coords: " + i + " is " + tempManhattan);
-                //Console.WriteLine(i);
             }
 
-
-
-            //foreach (var i in wire2Coords)
-            //{
-            //    Console.WriteLine(i);
-
-            //}
             Console.WriteLine("Shortest Manhattan distance is: " + coordsForShortest);
             Console.WriteLine("Shortest Manhattan distance is: " + manhattanDistanceFromOrigin);
 
-            //foreach (Tuple<int, int> i in wire1Coords)
-            //{
-            //    Console.WriteLine(i);
-            //}
-            //foreach (var i in wire1Coords)
-            //{
-            //    Console.WriteLine(i);
 
-            //}
-            //foreach (var i in wire2Coords)
-            //{
-            //    Console.WriteLine(i);
+            //Beginning of Solution for Part 2
+            //Real solution for Part two was added above with the Triple Tuple and adding in a Step Counter on the third section
+            int stepsAtIntersection = 0;
+            int tempStepsAtIntersection = 0;
+            foreach (var i in duplicates)
+            {
+                var wire1Intersection = wire1CoordsWithSteps.Where(t => t.Item1.Equals(i.Item1) && t.Item2.Equals(i.Item2)).ToList();  
+                var wire2Intersection = wire2CoordsWithSteps.Where(t => t.Item1.Equals(i.Item1) && t.Item2.Equals(i.Item2)).ToList();
+                tempStepsAtIntersection = wire1Intersection[0].Item3 + wire2Intersection[0].Item3;
+                if (tempStepsAtIntersection == 2)
+                {
+                    continue;
+                }
+                if (stepsAtIntersection == 0)
+                {
+                    stepsAtIntersection = tempStepsAtIntersection;
+                }
+                else if (tempStepsAtIntersection < stepsAtIntersection)
+                {
+                    stepsAtIntersection = tempStepsAtIntersection;
+                }
+                Console.WriteLine("TempStepsNumber at end of each loop iter: " + tempStepsAtIntersection);
 
-            //}
-            //reset coords
-            currentXCoord = 0; 
-            currentYCoord = 0;
-
+            }
+            Console.WriteLine("Shortest steps to intersection: " + stepsAtIntersection);
         }
-
         //Assuming Origin of (0,0)
         //Gets distance between origin and another point in "As the bird flies distance"
         public double DistanceFromOrigin(int xCoord, int yCoord)
