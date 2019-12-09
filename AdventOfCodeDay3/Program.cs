@@ -74,45 +74,49 @@ namespace AdventOfCodeDay3
 
                 if (s[0] == 'R')
                 {
-                    for (int i = currentXCoord; i <= currentXCoord + direction; i++)
+                    for (int i = currentXCoord; i < currentXCoord + direction; i++)
                     {
                         wire1Coords.Add(new Tuple<int, int>(i, currentYCoord));
                         wire1CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire1StepCounter));
                         wire1StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire1StepCounter);
                     currentXCoord += direction;
                 }
 
                 if (s[0] == 'L')
                 {
-                    for (int i = currentXCoord; i >= (currentXCoord - direction); i--)
+                    for (int i = currentXCoord; i > (currentXCoord - direction); i--)
                     {
                         wire1Coords.Add(new Tuple<int, int>(i, currentYCoord));
                         wire1CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire1StepCounter));
                         wire1StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire1StepCounter);
                     currentXCoord -= direction;
                 }
 
                 if (s[0] == 'U')
                 {
-                    for (int i = currentYCoord; i <= currentYCoord + direction; i++)
+                    for (int i = currentYCoord; i < currentYCoord + direction; i++)
                     {
                         wire1Coords.Add(new Tuple<int, int>(currentXCoord, i));
                         wire1CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire1StepCounter));
                         wire1StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire1StepCounter);
                     currentYCoord += direction;
                 }
 
                 if (s[0] == 'D')
                 {
-                    for (int i = currentYCoord; i >= (currentYCoord - direction); i--)
+                    for (int i = currentYCoord; i > (currentYCoord - direction); i--)
                     {
                         wire1Coords.Add(new Tuple<int, int>(currentXCoord, i));
                         wire1CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire1StepCounter));
                         wire1StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire1StepCounter);
                     currentYCoord -= direction;
 
                 }
@@ -126,42 +130,46 @@ namespace AdventOfCodeDay3
                 int direction = Convert.ToInt32(stringToConvert);
                 if (s[0] == 'R')
                 {
-                    for (int i = currentXCoord; i <= currentXCoord + direction; i++)
+                    for (int i = currentXCoord; i < currentXCoord + direction; i++)
                     {
                         wire2Coords.Add(new Tuple<int, int>(i, currentYCoord));
                         wire2CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire2StepCounter));
                         wire2StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire2StepCounter);
                     currentXCoord += direction;
                 }
                 if (s[0] == 'L')
                 {
-                    for (int i = currentXCoord; i >= (currentXCoord - direction); i--)
+                    for (int i = currentXCoord; i > (currentXCoord - direction); i--)
                     {
                         wire2Coords.Add(new Tuple<int, int>(i, currentYCoord));
                         wire2CoordsWithSteps.Add(new Tuple<int, int, int>(i, currentYCoord, wire2StepCounter));
                         wire2StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire2StepCounter);
                     currentXCoord -= direction;
                 }
                 if (s[0] == 'U')
                 {
-                    for (int i = currentYCoord; i <= currentYCoord + direction; i++)
+                    for (int i = currentYCoord; i < currentYCoord + direction; i++)
                     {
                         wire2Coords.Add(new Tuple<int, int>(currentXCoord, i));
                         wire2CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire2StepCounter));
                         wire2StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire2StepCounter);
                     currentYCoord += direction;
                 }
                 if (s[0] == 'D')
                 {
-                    for (int i = currentYCoord; i >= (currentYCoord - direction); i--)
+                    for (int i = currentYCoord; i > (currentYCoord - direction); i--)
                     {
                         wire2Coords.Add(new Tuple<int, int>(currentXCoord, i));
                         wire2CoordsWithSteps.Add(new Tuple<int, int, int>(currentXCoord, i, wire2StepCounter));
                         wire2StepCounter++;
                     }
+                    Console.WriteLine("Points with steps: " + currentXCoord + "," + currentYCoord + " " + wire2StepCounter);
                     currentYCoord -= direction;
                 }
             }
